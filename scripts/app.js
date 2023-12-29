@@ -51,7 +51,11 @@ search.addEventListener('click', () => {
                     break;
             }
 
-
+            // get other dynamic variable
+            temperature.innerHTML = `${parseInt(json.main.temp)}<span>°C</span>`;
+            description.innerHTML = `${json.weather[0].description}`;
+            humidity.innerHTML = `${parseInt(json.main.humidity)}<span>%</span>`;
+            wind.innerHTML = `${Math.floor(parseInt(json.wind.speed))}<span>Km/h</span>`;
 
 
         })

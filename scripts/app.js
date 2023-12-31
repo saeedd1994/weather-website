@@ -2,7 +2,7 @@ const container = document.querySelector('.container');
 const search = document.querySelector('.search-box button');
 const weatherBox = document.querySelector('.weather-box');
 const weatherDetails = document.querySelector('.weather-details');
-
+const notFound = document.querySelector('.not-found');
 search.addEventListener('click', () => {
     const APIkey = '55f428ad7a8370ee4852c41ecd5c1edb';
     const city = document.querySelector('.search-box input').value;
@@ -14,6 +14,18 @@ search.addEventListener('click', () => {
         .then(response => response.json())
         .then(json => {
             console.log(json)
+            if (json.cod === '404') {
+                container.style.height = '400px'
+                weatherBox.classList.remove('active');
+                weatherDetails.classList.remove('active');
+                notFound.classList.add('active');
+                return
+            }
+            container.style.height = '555px'
+            weatherBox.classList.add('active');
+            weatherDetails.classList.add('active');
+            notFound.classList.remove('active');
+
             const image = document.querySelector('.weather-box img');
             const temperature = document.querySelector('.weather-box .temperature');
             const description = document.querySelector('.weather-box .description');
